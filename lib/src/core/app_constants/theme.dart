@@ -1,6 +1,6 @@
-import 'package:cuddlecare/src/core/app_constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'app_colors.dart';
 
 ThemeData edisappParentTheme = ThemeData(
     primaryColor: AppColors.primaryColor,

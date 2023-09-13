@@ -1,5 +1,10 @@
-import 'package:cuddlecare/src/core/app_constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:petcare_app/src/core/utils/common_utils.dart';
+import 'package:petcare_app/src/features/login/widgets/login_widget.dart';
+import 'package:petcare_app/src/features/login/widgets/name_row.dart';
+import 'package:petcare_app/src/features/login/widgets/sign_up_widget.dart';
+import '../../../core/app_constants/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,107 +15,124 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isLogin = true;
-final List<bool> _selectedFruits = <bool>[true, false];
-   List<Widget> names=[
-    const Text('Login'),
-    const Text('Register')
-   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            height: 450,
-            decoration: BoxDecoration(
-                color: AppColors.white,
-                border: Border.all(color: AppColors.greyColor),
-                borderRadius: BorderRadius.circular(14)),
-            child: Stack(children: [
-               ToggleButtons(
-                direction:  Axis.horizontal,
-                onPressed: (int index) {
-                  setState(() {
-                    // The button that is tapped is set to true, and the others to false.
-                    for (int i = 0; i < _selectedFruits.length; i++) {
-                      _selectedFruits[i] = i == index;
-                    }
-                  });
-                },
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                selectedBorderColor: AppColors.white,
-                selectedColor: Colors.white,
-                fillColor: AppColors.primary2,
-                color: AppColors.white,
-                constraints: const BoxConstraints(
-                  minHeight: 40.0,
-                  minWidth: 80.0,
-                ),
-                isSelected: _selectedFruits,
-                children: names,
+        body: SizedBox(
+      width: width(context, 1),
+      height: height(context, 1),
+      child: Stack(children: [
+        Lottie.asset('assets/animation/background.json',
+            width: width(context, 1),
+            height: height(context, 1),
+            fit: BoxFit.cover),
+        Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isLogin = true;
+                      });
+                    },
+                    child: Container(
+                      width: 120,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              bottomLeft: Radius.circular(30)),
+                          color:
+                              isLogin ? AppColors.primary2 : AppColors.white),
+                      child: Center(
+                        child: Text(
+                          "Login",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                  color: isLogin
+                                      ? AppColors.white
+                                      : AppColors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isLogin = false;
+                      });
+                    },
+                    child: Container(
+                      width: 120,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(30),
+                              bottomRight: Radius.circular(30)),
+                          color:
+                              isLogin ? AppColors.white : AppColors.primary2),
+                      child: Center(
+                        child: Text(
+                          "Sign Up",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                  color: isLogin
+                                      ? AppColors.black
+                                      : AppColors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 20),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       InkWell(
-              //         onTap: () {
-              //           setState(() {
-              //             isLogin = true;
-              //           });
-              //         },
-              //         child: Container(
-              //           height: 45,
-              //           width: width(context, 0.3),
-              //           decoration:  BoxDecoration(
-              //               color:isLogin? AppColors.primary2:AppColors.white,
-              //               border: Border.all(color:isLogin? AppColors.white:AppColors.black,width: 0.3),
-              //               borderRadius:const BorderRadius.only(
-              //                   topLeft: Radius.circular(14),
-              //                   bottomLeft: Radius.circular(14))),
-              //           child: Center(
-              //             child:  Text(
-              //                 'Login',
-              //                 style: TextStyle(
-              //                     color:isLogin? AppColors.white:AppColors.black,
-              //                     fontSize: 18,
-              //                     fontWeight: FontWeight.w600),
-              //               ),   
-              //           ),
-              //         ),
-              //       ),
-              //       InkWell(
-              //         onTap: (){
-              //           setState(() {
-              //             isLogin = false;
-              //           });
-              //         },
-              //         child: Container(
-              //             height: 45,
-              //             width: width(context, 0.3),
-              //             decoration:  BoxDecoration(
-              //                 color:isLogin? AppColors.white:AppColors.primary2,
-              //                  border: Border.all(color:isLogin? AppColors.black:AppColors.white,width: 0.3),
-              //                 borderRadius:const BorderRadius.only(
-              //                     topRight: Radius.circular(14),
-              //                     bottomRight: Radius.circular(14))),
-              //             child: Center(
-              //               child:   Text(
-              //                   'Register',
-              //                   style: TextStyle(
-              //                       color:isLogin?AppColors.black: AppColors.white,
-              //                       fontSize: 18,
-              //                       fontWeight: FontWeight.w600),
-              //                 ),
-              //             )),
-              //       ),
-              //     ],
-              //   ),
-              // )
-            ]),
+              const SizedBox(height: 20),
+              isLogin ? const LoginWidget() : const SignUpWidget(),
+              const SizedBox(height: 20),
+              isLogin
+                  ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          isLogin = false;
+                        });
+                      },
+                      child: Text("Don't have an account? Sign Up",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.white,
+                                    fontSize: 12,
+                                  )),
+                    )
+                  : InkWell(
+                      onTap: () {
+                        setState(() {
+                          isLogin = true;
+                        });
+                      },
+                      child: Text("Alreadyhave an account? Log In",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.white,
+                                    fontSize: 12,
+                                  )),
+                    ),
+            ],
           ),
-        ));
+        )
+      ]),
+    ));
   }
 }
