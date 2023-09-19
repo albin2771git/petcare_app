@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:petcare_app/src/features/login/pages/login_screen.dart';
 import '../../../core/app_constants/app_colors.dart';
 import '../../../core/utils/common_utils.dart';
+import '../../login/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -47,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             Navigator.push(
                                 context,
                                 PageTransition(
-                                    child:const LoginScreen(),
+                                    child:const Login(),
                                     type: PageTransitionType.bottomToTop));
                           },
                           icon: Icon(

@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:petcare_app/src/core/utils/common_utils.dart';
-import 'package:petcare_app/src/features/login/widgets/login_widget.dart';
-import 'package:petcare_app/src/features/login/widgets/name_row.dart';
-import 'package:petcare_app/src/features/login/widgets/sign_up_widget.dart';
+import 'package:petcare_app/src/features/login/login.dart';
+import 'package:provider/provider.dart';
 import '../../../core/app_constants/app_colors.dart';
+import '../../../core/app_constants/app_strings.dart';
+import '../../../core/common_widgets/common_button.dart';
+import '../../../core/common_widgets/common_textfield.dart';
+import '../../../core/common_widgets/toast.dart';
+import '../presentation/login_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,10 +20,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
+  TextEditingController signUpEmailController = TextEditingController();
+  TextEditingController signUpPasswordController = TextEditingController();
+  TextEditingController passwordAgainController = TextEditingController();
   bool isLogin = true;
+  bool viewpassword = true;
+  bool conformPassword = true;
 
   @override
   Widget build(BuildContext context) {
+    LoginProvider provider = context.watch<LoginProvider>();
     return Scaffold(
         body: SizedBox(
       width: width(context, 1),
@@ -100,7 +116,239 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              isLogin ? const LoginWidget() : const SignUpWidget(),
+              isLogin
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 34),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CommonTextFieldWidget(
+                              hintText: "Enter your password",
+                              controller: emailController),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: passwordController,
+                            cursorColor: AppColors.white,
+                            style: const TextStyle(
+                                color: AppColors.white, fontSize: 14),
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              hintText: "Enter your password",
+                              hintStyle: const TextStyle(
+                                  fontSize: 12, color: AppColors.white),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      if (viewpassword) {
+                                        viewpassword = false;
+                                      } else {
+                                        viewpassword = true;
+                                      }
+                                    });
+                                  },
+                                  icon: Icon(
+                                    viewpassword == true
+                                        ? Icons.remove_red_eye
+                                        : Icons.visibility_off,
+                                    color: AppColors.white,
+                                  )),
+                            ),
+                            obscureText: viewpassword,
+                            obscuringCharacter: "*",
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CommonButtonWidget(
+                                  width: 90,
+                                  height: 32,
+                                  color: AppColors.primary2,
+                                  radius: 8,
+                                  textColor: AppColors.white,
+                                  text: "Cancel",
+                                  onPressed: () {},
+                                ),
+                                CommonButtonWidget(
+                                  width: 90,
+                                  height: 32,
+                                  color: AppColors.primary2,
+                                  radius: 8,
+                                  textColor: AppColors.white,
+                                  text: "Login",
+                                  onPressed: () async {
+                                    if (emailController.text
+                                            .trim()
+                                            .isNotEmpty &&
+                                        passwordController.text
+                                            .trim()
+                                            .isNotEmpty) {
+                                      dynamic body = {
+                                        "email": emailController.text.trim(),
+                                        "password":
+                                            passwordController.text.trim()
+                                      };
+                                      var bodyData=jsonEncode(body);
+                                      provider.login(context, bodyData);
+                                    } else {
+                                      CommonCreateFunction.uploadFailFunction(
+                                          context, AppStrings.enterValidValues);
+                                    }
+                                  },
+                                )
+                              ]),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 34),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CommonTextFieldWidget(
+                              hintText: "Enter your name",
+                              controller: nameController),
+                          const SizedBox(height: 20),
+                          CommonTextFieldWidget(
+                              hintText: "Enter your mobile number",
+                              controller: numberController),
+                          const SizedBox(height: 20),
+                          CommonTextFieldWidget(
+                              hintText: "Enter your email",
+                              controller: signUpEmailController),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: signUpPasswordController,
+                            cursorColor: AppColors.white,
+                            style: const TextStyle(
+                                color: AppColors.white, fontSize: 14),
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              hintText: "Enter your password",
+                              hintStyle: const TextStyle(
+                                  fontSize: 12, color: AppColors.white),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      if (viewpassword) {
+                                        viewpassword = false;
+                                      } else {
+                                        viewpassword = true;
+                                      }
+                                    });
+                                  },
+                                  icon: Icon(
+                                    viewpassword == true
+                                        ? Icons.remove_red_eye
+                                        : Icons.visibility_off,
+                                    color: AppColors.white,
+                                  )),
+                            ),
+                            obscureText: viewpassword,
+                            obscuringCharacter: "*",
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: passwordAgainController,
+                            cursorColor: AppColors.white,
+                            style: const TextStyle(
+                                color: AppColors.white, fontSize: 14),
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.white),
+                                  borderRadius: BorderRadius.circular(8)),
+                              hintText: "Enter your password Again",
+                              hintStyle: const TextStyle(
+                                  fontSize: 12, color: AppColors.white),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      if (conformPassword) {
+                                        conformPassword = false;
+                                      } else {
+                                        conformPassword = true;
+                                      }
+                                    });
+                                  },
+                                  icon: Icon(
+                                    conformPassword == true
+                                        ? Icons.remove_red_eye
+                                        : Icons.visibility_off,
+                                    color: AppColors.white,
+                                  )),
+                            ),
+                            obscureText: conformPassword,
+                            obscuringCharacter: "*",
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CommonButtonWidget(
+                                  width: 90,
+                                  height: 32,
+                                  color: AppColors.primary2,
+                                  radius: 12,
+                                  textColor: AppColors.white,
+                                  text: "Cancel",
+                                  onPressed: () {},
+                                ),
+                                CommonButtonWidget(
+                                  width: 90,
+                                  height: 32,
+                                  color: AppColors.primary2,
+                                  radius: 12,
+                                  textColor: AppColors.white,
+                                  text: "Sign Up",
+                                  onPressed: () {
+                                    if (nameController.text.trim().isNotEmpty &&
+                                        numberController.text
+                                            .trim()
+                                            .isNotEmpty &&
+                                        emailController.text
+                                            .trim()
+                                            .isNotEmpty &&
+                                        passwordController.text
+                                            .trim()
+                                            .isNotEmpty &&
+                                        passwordAgainController.text
+                                            .trim()
+                                            .isNotEmpty) {
+                                      CreateSuccessToast(
+                                          context: context,
+                                          message: AppStrings
+                                              .registrationSuccessfull);
+                                    } else {
+                                      CommonCreateFunction.uploadFailFunction(
+                                          context, AppStrings.enterValidValues);
+                                    }
+                                  },
+                                )
+                              ]),
+                        ],
+                      ),
+                    ),
               const SizedBox(height: 20),
               isLogin
                   ? InkWell(

@@ -43,6 +43,7 @@ dependencies:
   crop_image: ^1.0.11
   lottie: 
   fluttertoast:
+  http:
 
 dev_dependencies:
   flutter_test:

@@ -30,12 +30,6 @@ class CommonTextFieldWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius)),
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 12, color: AppColors.white)),
-  // validator: (text){
-  //   if(text!.isEmpty){
-  //     return "Please enter valid $hintText";
-  //   }
-  //   return null;
-  // },
     );
   }
 }
