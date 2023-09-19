@@ -39,7 +39,6 @@ dependencies:
   intl:
   google_fonts:
   cached_network_image:
-  page_transition:
   crop_image: ^1.0.11
   lottie: 
   fluttertoast:
