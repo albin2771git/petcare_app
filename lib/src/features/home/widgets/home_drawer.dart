@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/app_constants/app_colors.dart';
-import 'package:petcare_app/src/core/app_constants/app_strings.dart';
 import 'package:petcare_app/src/core/app_constants/configuration.dart';
-
-import '../../drawer/pages/profile_ui.dart';
+import '../../theme/pages/theme_page.dart';
+import '../../drawer/widgets/profile_select_widget.dart';
 import '../pages/module_list.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -23,20 +22,7 @@ class HomeDrawer extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                      color: AppColors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/person.jpg')),
-                    ),
-                  ),
+                  const ProfileSelectWidget(),
                   const SizedBox(
                     height: 10,
                   ),
@@ -59,10 +45,6 @@ class HomeDrawer extends StatelessWidget {
                   )
                 ],
               )),
-          drawerTile(context, 'View Profile', () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfileUi()));
-          }, 'assets/icons/user.png'),
           drawerTile(context, 'View Appointments', () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ModuleList()));
@@ -72,6 +54,10 @@ class HomeDrawer extends StatelessWidget {
           drawerTile(
               context, 'contact us', () {}, 'assets/icons/telephone.png'),
           drawerTile(context, 'logout', () {}, 'assets/icons/logout.png'),
+          drawerTile(context, 'Theme', () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ThemePage()));
+          }, 'assets/icons/logout.png'),
         ],
       ),
     );

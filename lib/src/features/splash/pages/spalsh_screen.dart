@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/src/features/home/pages/home_screen.dart';
 import '../../../core/app_constants/app_colors.dart';
 import '../../../core/utils/common_utils.dart';
 import '../../login/login.dart';
@@ -34,8 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                    Navigator.push(
+                        context,
+                        //  MaterialPageRoute(builder: (context) => const Login()));
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
                   },
                   child: Container(
                     height: 55,

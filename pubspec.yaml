@@ -43,6 +43,8 @@ dependencies:
   lottie: 
   fluttertoast:
   http:
+  image_picker: ^1.0.4
+  shared_preferences: 
 
 dev_dependencies:
   flutter_test:
