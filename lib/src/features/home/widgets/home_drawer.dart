@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/app_constants/app_colors.dart';
 import 'package:petcare_app/src/core/app_constants/configuration.dart';
 import 'package:petcare_app/src/features/theme/pages/theme_settings.dart';
-import '../../theme/pages/theme_page.dart';
 import '../../drawer/widgets/profile_select_widget.dart';
 import '../pages/module_list.dart';
 
@@ -12,11 +11,12 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+     backgroundColor: Theme.of(context).cardColor,
       child: ListView(
         children: [
           Container(
-              decoration: const BoxDecoration(
-                color: AppColors.primary2,
+              decoration:  BoxDecoration(
+                color:Theme.of(context).cardTheme.color,
               ),
               child: Column(
                 children: [
@@ -46,6 +46,7 @@ class HomeDrawer extends StatelessWidget {
                   )
                 ],
               )),
+          const ThemeSettings(),
           drawerTile(context, 'View Appointments', () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ModuleList()));
@@ -55,10 +56,6 @@ class HomeDrawer extends StatelessWidget {
           drawerTile(
               context, 'contact us', () {}, 'assets/icons/telephone.png'),
           drawerTile(context, 'logout', () {}, 'assets/icons/logout.png'),
-          drawerTile(context, 'Theme', () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ThemeSettings()));
-          }, 'assets/icons/logout.png'),
         ],
       ),
     );
@@ -71,8 +68,8 @@ class HomeDrawer extends StatelessWidget {
         children: [
           Image.asset(
             image,
-            width: 25,
-            height: 25,
+            width: 30,
+            height: 30,
           ),
           const SizedBox(
             width: 15,

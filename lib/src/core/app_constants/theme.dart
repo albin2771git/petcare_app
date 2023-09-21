@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
-
-// ThemeData edisappParentTheme = ThemeData(
-//     primaryColor: AppColors.primaryColor,
-//     disabledColor: AppColors.greyColor,
-//     textSelectionTheme:
-//         const TextSelectionThemeData(cursorColor: AppColors.blueLightColor),
-//     textTheme: TextTheme(
-//         displayLarge: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         displayMedium: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         displaySmall: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         headlineMedium: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         headlineSmall: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         titleLarge: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         titleMedium: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         bodyLarge: GoogleFonts.poppins(textStyle: const TextStyle()),
-//         titleSmall: GoogleFonts.playfairDisplay(textStyle: const TextStyle()),
-//         bodyMedium: GoogleFonts.poppins(textStyle: const TextStyle())),
-//     colorScheme: ColorScheme.fromSwatch()
-//         .copyWith(secondary: AppColors.yellowColoryColor)
-//         .copyWith(background: AppColors.softBlueColor));
 
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       appBarTheme: isDarkTheme
-          ? const AppBarTheme(backgroundColor: AppColors.darkTheme)
-          : const AppBarTheme(backgroundColor: AppColors.white),
+          ? const AppBarTheme(
+              backgroundColor: AppColors.darkTheme,
+              foregroundColor: AppColors.white,
+              titleTextStyle: TextStyle(
+                color: AppColors.white,
+              ))
+          : const AppBarTheme(
+              backgroundColor: AppColors.white,
+              foregroundColor: AppColors.black,
+              titleTextStyle: TextStyle(color: AppColors.black)),
       scaffoldBackgroundColor: isDarkTheme ? AppColors.darkTheme : Colors.white,
       primaryColor: AppColors.primary2,
       colorScheme: Theme.of(context).colorScheme.copyWith(
@@ -41,6 +28,20 @@ class Styles {
                 ? const ColorScheme.dark()
                 : const ColorScheme.light(),
           ),
+      textTheme: isDarkTheme
+          ? Theme.of(context).textTheme.apply(
+                bodyColor: AppColors.white,
+                displayColor: AppColors.white,
+                fontFamily: 'Poppins',
+              )
+          : Theme.of(context).textTheme.apply(
+                bodyColor: AppColors.black,
+                displayColor: AppColors.black,
+                fontFamily: 'Poppins',
+              ),
+      iconTheme: isDarkTheme
+          ? const IconThemeData(color: AppColors.white)
+          : const IconThemeData(color: AppColors.black),
       useMaterial3: true,
     );
   }

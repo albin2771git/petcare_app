@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: Styles.themeData(false, context),
               darkTheme: Styles.themeData(true, context),
-              themeMode: value.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+              themeMode: value.darkTheme ? ThemeMode.dark : ThemeMode.light,
               home: const SplashScreen(),
             );
           },

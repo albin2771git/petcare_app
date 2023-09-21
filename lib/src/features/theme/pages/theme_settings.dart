@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/src/core/app_constants/app_colors.dart';
 import 'package:provider/provider.dart';
-
 import '../presentation/theme_provider.dart';
 
 class ThemeSettings extends StatelessWidget {
@@ -8,23 +8,40 @@ class ThemeSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Theme Settings'),
-        ),
-        body: Center(
-            child: Consumer<ThemeProvider>(builder: (context, value2, child) {
-          return Column(
+    return Center(
+        child: Consumer<ThemeProvider>(builder: (context, value2, child) {
+      return ListTile(
+          title: Row(
             children: [
-              Text(value2.isDarkTheme.toString()),
-              SwitchListTile(
-                  title: const Text("data"),
-                  value: value2.isDarkTheme,
-                  onChanged: (value) {
-                    value2.toggleTheme();
-                  }),
+              Image.asset(
+                value2.darkTheme
+                    ? 'assets/icons/night-mode.png'
+                    : 'assets/icons/moon.png',
+                width: 30,
+                height: 30,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                value2.darkTheme ? 'Light Mode' : 'Dark Mode',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
+              ),
             ],
-          );
-        })));
+          ),
+          trailing: Switch(
+            value: value2.darkTheme,
+            onChanged: (value) {
+              value2.setterDarkTheme = value;
+            },
+            activeColor: AppColors.primaryColor,
+            activeTrackColor: AppColors.primaryColor.withOpacity(0.5),
+            inactiveThumbColor: AppColors.greyColor,
+            inactiveTrackColor: AppColors.greyColor.withOpacity(0.5),
+          ));
+    }));
   }
 }
