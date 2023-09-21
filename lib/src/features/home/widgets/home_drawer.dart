@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/app_constants/app_colors.dart';
 import 'package:petcare_app/src/core/app_constants/configuration.dart';
+import 'package:petcare_app/src/features/theme/pages/theme_settings.dart';
 import '../../theme/pages/theme_page.dart';
 import '../../drawer/widgets/profile_select_widget.dart';
 import '../pages/module_list.dart';
@@ -56,7 +57,7 @@ class HomeDrawer extends StatelessWidget {
           drawerTile(context, 'logout', () {}, 'assets/icons/logout.png'),
           drawerTile(context, 'Theme', () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ThemePage()));
+                MaterialPageRoute(builder: (context) => const ThemeSettings()));
           }, 'assets/icons/logout.png'),
         ],
       ),

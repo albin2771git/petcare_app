@@ -8,18 +8,23 @@ class ThemeSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Theme Settings'),
-      ),
-      body: Center(
-          child: SwitchListTile(
-              title: const Text("data"),
-              value: themeProvider.darkTheme,
-              onChanged: (value) {
-                themeProvider.setDarkTheme = value;
-              })),
-    );
+        appBar: AppBar(
+          title: const Text('Theme Settings'),
+        ),
+        body: Center(
+            child: Consumer<ThemeProvider>(builder: (context, value2, child) {
+          return Column(
+            children: [
+              Text(value2.isDarkTheme.toString()),
+              SwitchListTile(
+                  title: const Text("data"),
+                  value: value2.isDarkTheme,
+                  onChanged: (value) {
+                    value2.toggleTheme();
+                  }),
+            ],
+          );
+        })));
   }
 }

@@ -5,6 +5,7 @@ import 'src/core/app_constants/theme.dart';
 import 'src/features/splash/pages/spalsh_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -16,29 +17,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeProvider themeProvider = ThemeProvider();
-
-  void getCurrentAppTheme() async {
-    themeProvider.setDarkTheme = await themeProvider.themePref.getDarkTheme();
-  }
-
-  @override
-  void initState() {
-    getCurrentAppTheme();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => themeProvider),
-        ],
+    return ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
         child: Consumer<ThemeProvider>(
           builder: (context, value, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: Styles.themeData(themeProvider.darkTheme, context),
+              theme: Styles.themeData(false, context),
+              darkTheme: Styles.themeData(true, context),
+              themeMode: value.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
               home: const SplashScreen(),
             );
           },

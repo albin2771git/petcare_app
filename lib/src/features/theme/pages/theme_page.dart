@@ -10,7 +10,7 @@ class ThemePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
+      create: (context) => ThemeProvider(),
       child: const ThemeSettings(),
     );
   }
