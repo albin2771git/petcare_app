@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/app_constants/app_colors.dart';
 import 'package:petcare_app/src/core/app_constants/configuration.dart';
 import 'package:petcare_app/src/features/theme/pages/theme_settings.dart';
+import '../../drawer/pages/about_us_ui.dart';
+import '../../drawer/pages/contact_us_ui.dart';
 import '../../drawer/widgets/profile_select_widget.dart';
 import '../pages/module_list.dart';
 
@@ -11,12 +13,12 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-     backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: Theme.of(context).cardColor,
       child: ListView(
         children: [
           Container(
-              decoration:  BoxDecoration(
-                color:Theme.of(context).cardTheme.color,
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardTheme.color,
               ),
               child: Column(
                 children: [
@@ -51,10 +53,14 @@ class HomeDrawer extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ModuleList()));
           }, 'assets/icons/calendar.png'),
-          drawerTile(
-              context, 'about us', () {}, 'assets/icons/information.png'),
-          drawerTile(
-              context, 'contact us', () {}, 'assets/icons/telephone.png'),
+          drawerTile(context, 'about us', () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AboutUsUI()));
+          }, 'assets/icons/information.png'),
+          drawerTile(context, 'contact us', () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ContactUsUI()));
+          }, 'assets/icons/telephone.png'),
           drawerTile(context, 'logout', () {}, 'assets/icons/logout.png'),
         ],
       ),

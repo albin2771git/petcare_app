@@ -7,5 +7,5 @@ class AppStrings {
   static const String signUpSuccess = 'Successfully Signed Up';
   static const String signUpFailed = 'Sign Up Failed, Please try again';
   static const String signUpFailedCheck = 'Please check your details';
-
+  static const String tryAgainLater = 'Please try again later';
   }
