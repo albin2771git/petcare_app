@@ -42,14 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SalomonBottomBar(
-          currentIndex: 0,
-          onTap: (i) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => pages[i]));
-            setState(() {
-              initialPage = i;
-            });
-          },
+          currentIndex: initialPage,
+          onTap: (i) => setState(() => initialPage = i),
           items: [
             /// Home
             SalomonBottomBarItem(
