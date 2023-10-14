@@ -8,4 +8,10 @@ class AppStrings {
   static const String signUpFailed = 'Sign Up Failed, Please try again';
   static const String signUpFailedCheck = 'Please check your details';
   static const String tryAgainLater = 'Please try again later';
-  }
+
+  //----- Module names------------
+  static const String home = "Home";
+  static const String search = "Search";
+  static const String wishlist = "Wishlist";
+  static const String profile = "Profile";
+}
