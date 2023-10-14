@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
               theme: Styles.themeData(false, context),
               darkTheme: Styles.themeData(true, context),
               themeMode: value.darkTheme ? ThemeMode.dark : ThemeMode.light,
+
               home: const SplashScreen(),
             );
           },

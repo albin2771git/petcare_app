@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/app_constants/app_strings.dart';
+import 'package:petcare_app/src/features/home/widgets/custom_bottom_navigation_bar.dart';
 import '../../../core/common_widgets/common_appbar_text.dart';
 import '../widgets/home_drawer.dart';
 
@@ -9,19 +10,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            centerTitle: true,
-            title: const CommonAppBarText(text: AppStrings.appName),
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 30,
-                ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+      appBar: AppBar(
+          centerTitle: true,
+          title: const CommonAppBarText(text: AppStrings.appName),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Theme.of(context).iconTheme.color,
+                size: 30,
               ),
-            )),
-        drawer: const HomeDrawer());
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          )),
+      drawer: const HomeDrawer(),
+      extendBody: true,
+      bottomNavigationBar: const CustomBottomNavigationBar(),
+    );
   }
 }

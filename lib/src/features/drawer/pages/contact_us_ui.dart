@@ -34,23 +34,20 @@ class ContactUsUI extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  rowWidget(
-                      context, "assets/icons/github.png", "albin2771git", () {}),
+                  rowWidget(context, "assets/icons/github.png", "albin2771git",
+                      () {}),
                   rowWidget(
                       context, "assets/icons/threads.png", "58,456,848", () {}),
-                  rowWidget(context, "assets/icons/instagram.png", "Instagram",
+                  rowWidget(context, "assets/icons/instagram.png", "_me_albin",
                       () {}),
                   rowWidget(context, "assets/icons/whatsapp_logo.png",
-                      "_me_albin", () {}),
-                  rowWidget(
-                      context, "assets/icons/facebook.png", "Albin Thomas", () {}),
+                      "Albin Thomas", () {}),
+                  rowWidget(context, "assets/icons/facebook.png",
+                      "Albin Thomas", () {}),
                   rowWidget(context, "assets/icons/telephone-call.png", "Call",
                       () {}),
                 ],
-              )
-                  .animate()
-                  .fade(duration: const Duration(milliseconds: 1200)).scaleX(delay: 300.ms)
-                  .move(curve: Curves.easeIn),
+              ).animate().fade(duration: const Duration(milliseconds: 1200))
             ],
           ),
         ));
