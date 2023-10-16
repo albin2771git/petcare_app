@@ -8,6 +8,7 @@ import '../../search/pages/search_ui.dart';
 import '../../wishlist/pages/wishlist_ui.dart';
 import '../widgets/home_drawer.dart';
 import '../widgets/home_page_view.dart';
+import '../widgets/location_row_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: const CommonAppBarText(text: AppStrings.appName),
+          title:const LocationRowWidget(),
           leading: Builder(
             builder: (context) => IconButton(
               icon: Icon(
@@ -49,28 +50,29 @@ class _HomeScreenState extends State<HomeScreen> {
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text(AppStrings.home),
-              selectedColor: AppColors.primary2,
+              selectedColor: Theme.of(context).iconTheme.color,
             ),
 
             /// Search
             SalomonBottomBarItem(
               icon: const Icon(Icons.search),
               title: const Text(AppStrings.search),
-              selectedColor: AppColors.primary2,
+              selectedColor:Theme.of(context).iconTheme.color,
             ),
 
             /// Favorates
             SalomonBottomBarItem(
               icon: const Icon(Icons.favorite_border),
               title: const Text(AppStrings.wishlist),
-              selectedColor: const Color.fromARGB(255, 249, 76, 16),
+              selectedColor:Theme.of(context).iconTheme.color,
+
             ),
 
             /// Profile
             SalomonBottomBarItem(
               icon: const Icon(Icons.person),
               title: const Text(AppStrings.profile),
-              selectedColor: AppColors.primary2,
+              selectedColor: Theme.of(context).iconTheme.color,
             ),
           ],
         ),

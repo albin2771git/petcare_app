@@ -48,6 +48,7 @@ dependencies:
   url_launcher:
   flutter_animate:
   salomon_bottom_bar:
+  carousel_slider: 
 
 dev_dependencies:
   flutter_test:

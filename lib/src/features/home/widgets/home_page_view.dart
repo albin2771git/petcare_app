@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/src/core/utils/common_utils.dart';
-
-import '../../../core/app_constants/app_strings.dart';
+import '../../book_apointments/page/book_appointments_ui.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
@@ -11,9 +10,12 @@ class HomePageView extends StatelessWidget {
     return SizedBox(
       width: width(context, 1),
       height: height(context, 1),
-      child: const Center(
-        child: Text(AppStrings.home),
-      ),
+      child: ListView(
+        children: const[
+        //  LocationRowWidget(),
+          BookAppointMents()
+        ],
+      )
     );
   }
 }
